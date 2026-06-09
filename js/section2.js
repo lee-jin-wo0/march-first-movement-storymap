@@ -12,18 +12,18 @@ const revealObserver = new IntersectionObserver((entries) => {
 // 2. 섹션 2 GeoJSON 연동 및 통합 로직
 async function initSection2Map() {
     const mapS2 = L.map('map-s2', { zoomControl: false, scrollWheelZoom: false }).setView([37.5759, 126.9850 - 0.01], 15);
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    // }).addTo(mapS2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mapS2);
     // L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     //     attribution: '© OpenStreetMap contributors'
     // }).addTo(mapS2);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(mapS2);
+    // L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    //     attribution: '© OpenStreetMap contributors'
+    // }).addTo(mapS2);
 
     const pathLine = L.polyline([], {
-        color: '#a83228', weight: 3, dashArray: '8, 8', opacity: 0.8, lineJoin: 'round'
+        color: '#000000', weight: 3, dashArray: '8, 8', opacity: 1, lineJoin: 'round'
     }).addTo(mapS2);
 
     try {
@@ -45,7 +45,7 @@ async function initSection2Map() {
                 // (만약 아직 추가 안 하셨다면 우측의 기본값이 출력됩니다)
                 timelineData.push({
                     id: targetId,
-                    date: feature.properties.DATE || "날짜 없음",
+                    date: feature.properties.DATE || feature.properties.ADDR_OLD || "날짜 없음",
                     title: feature.properties.TITLE || feature.properties.CONTENTS_NAME,
                     desc: feature.properties.DESC || feature.properties.VALUE_03 || "설명 정보가 없습니다."
                 });

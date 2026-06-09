@@ -198,7 +198,7 @@
 
 .sc2-item-date {
     display: inline-block;
-    color: #a83228;
+    color: #ffffff;
     font-weight: bold;
     font-size: 0.875rem;
     letter-spacing: 0.1em;
@@ -214,7 +214,7 @@
 }
 
 .sc2-timeline-item:hover .sc2-item-title {
-    color: #a83228;
+    /* color: #a83228; */
     /* 마우스 올렸을 때 포인트 컬러 유지 */
 }
 
@@ -242,11 +242,11 @@
 @keyframes sc2-marker-pulse {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(168, 50, 40, 0.7);
+        box-shadow: 0 0 0 0 rgba(168, 50, 40, 0);
     }
 
     70% {
-        transform: scale(1.1);
+        transform: scale(1);
         box-shadow: 0 0 0 15px rgba(168, 50, 40, 0);
     }
 
@@ -280,7 +280,8 @@
 .sc2-marker-circle {
     width: 2rem;
     height: 2rem;
-    background-color: #a83228;
+    /* background-color: #a83228; */
+    background-color: black;
     border-radius: 9999px;
     display: flex;
     align-items: center;
@@ -288,7 +289,7 @@
     color: white;
     font-weight: bold;
     font-size: 0.875rem;
-    box-shadow: 0 0 15px rgba(168, 50, 40, 0.5);
+    box-shadow: 0 0 15px rgba(12, 4, 4, 0.5);
 }
 
 .sc2-marker-label {
