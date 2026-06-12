@@ -1,0 +1,335 @@
+/* =========================================
+   섹션 3 : 전체 구조
+========================================= */
+.sc3-section {
+    position: relative;
+    background-color: #0e0e0e;
+    color: white;
+}
+
+/* 텍스처 오버레이 공통 */
+.sc3-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    pointer-events: none;
+}
+
+.sc3-overlay-header {
+    opacity: 0.1;
+}
+
+/* =========================================
+   헤더 영역
+========================================= */
+.sc3-header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 2rem;
+}
+
+.sc3-header-bg {
+    position: absolute;
+    inset: 0;
+    background-color: #0e0e0e;
+    /* 필요시 백그라운드 이미지 추가 가능 */
+    opacity: 0.9;
+}
+
+.sc3-header-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.sc3-chapter-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.sc3-chapter-num {
+    font-family: 'Playfair Display', serif;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 2.25rem;
+}
+
+.sc3-divider {
+    height: 1px;
+    width: 3rem;
+    background-color: #a83228;
+}
+
+.sc3-chapter-subtitle {
+    color: #a83228;
+    font-weight: bold;
+    letter-spacing: 0.4em;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+}
+
+.sc3-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1.5rem;
+    max-width: 56rem;
+    letter-spacing: -0.02em;
+}
+
+.sc3-desc {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 42rem;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 1.125rem;
+}
+
+@media (min-width: 768px) {
+    .sc3-title {
+        font-size: 3rem;
+    }
+}
+
+/* =========================================
+   콘텐츠 레이아웃 (배경 지도 + 카드 스크롤 겹침)
+========================================= */
+.sc3-content-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+}
+
+/* =========================================
+   지도 영역 (전체 화면 배경으로 완벽 고정)
+========================================= */
+.sc3-map-pane {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: #0e0e0e;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.sc3-map-inner {
+    width: 100%;
+    height: 100%;
+    /* filter: grayscale(100%) brightness(0.6); */
+    /* 지도 어둡게 처리 */
+}
+
+.sc3-map-shadow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+    z-index: 2;
+}
+
+/* =========================================
+   카드 영역 (지도 위를 스크롤)
+========================================= */
+.sc3-timeline-pane {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: 50vh 2rem 50vh 2rem;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .sc3-timeline-pane {
+        padding-left: 10%;
+    }
+}
+
+.sc3-timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 80vh;
+    /* 카드 간격 멀리 배치 */
+}
+
+/* =========================================
+   개별 카드 디자인
+========================================= */
+.sc3-timeline-item {
+    pointer-events: auto;
+    background-color: rgba(14, 14, 14, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    cursor: default;
+}
+
+.sc3-item-title {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.sc3-item-desc {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.625;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.sc3-route-path {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(168, 50, 40, 0.3);
+    font-size: 0.85rem;
+    color: #bbb;
+    line-height: 1.5;
+}
+
+.sc3-route-path strong {
+    color: #a83228;
+    display: block;
+    margin-bottom: 0.2rem;
+    margin-top: 0.8rem;
+}
+
+.sc3-route-path strong:first-child {
+    margin-top: 0;
+}
+
+/* 스크롤 애니메이션 효과 (scroll-reveal) */
+.sc3-scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sc3-scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   섹션 3: 스크롤 카드 내부 데이터 스타일
+========================================= */
+
+.sc3-route-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(168, 50, 40, 0.3);
+    margin-bottom: 1.5rem;
+}
+
+.sc3-desc-box {
+    padding: 0 0.5rem;
+}
+
+.sc3-route-label {
+    display: block;
+    color: #a83228;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.sc3-route-val {
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    word-break: keep-all;
+}
+
+.sc3-item-desc {
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* =========================================
+   섹션 3: 지도 마커 스타일 (선 애니메이션은 JS에서 동적 처리)
+========================================= */
+
+/* 출발/도착 마커 컨테이너 */
+.sc3-point-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* 마커 텍스트 라벨 (출발, 도착) */
+.sc3-point-label {
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* 마커 하단 동그라미 포인트 */
+.sc3-point-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+/* 출발점 전용 색상
+.sc3-point-marker.start .sc3-point-dot { 
+    background-color: #3498db; 
+}
+.sc3-point-marker.start .sc3-point-label { 
+    color: #3498db; 
+}
+
+/* 도착점 전용 색상
+.sc3-point-marker.end .sc3-point-dot { 
+    background-color: #e74c3c; 
+}
+.sc3-point-marker.end .sc3-point-label { 
+    color: #e74c3c; 
+}  */
+
+/* 출발점 전용 색상 */
+.sc3-point-marker.start .sc3-point-dot { 
+    background-color: #000000; 
+}
+.sc3-point-marker.start .sc3-point-label { 
+    color: #ffffff; 
+}
+
+/* 도착점 전용 색상 */
+.sc3-point-marker.end .sc3-point-dot { 
+    background-color: #000000; 
+}
+.sc3-point-marker.end .sc3-point-label { 
+    color: #ffffff; 
+} 

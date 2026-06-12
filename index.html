@@ -11,12 +11,14 @@
 
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/section2.css" />
+    <link rel="stylesheet" href="./css/section3.css" />
 </head>
 
 <body class="global-body">
+    <!-- 네비게이션 -->
     <nav class="global-dot-nav">
         <div class="global-dot" data-target-section="1"></div>
-        <div class="global-dot active" data-target-section="2"></div>
+        <div class="global-dot" data-target-section="2"></div>
         <div class="global-dot" data-target-section="3"></div>
         <div class="global-dot" data-target-section="4"></div>
         <div class="global-dot" data-target-section="5"></div>
@@ -24,6 +26,8 @@
         <div class="global-dot" data-target-section="7"></div>
     </nav>
 
+
+    <!-- 섹션2 준비과정 -->
     <section data-section="2" class="sc2-section" id="section-2">
         <header class="sc2-header">
             <div class="sc2-header-bg"></div>
@@ -44,15 +48,46 @@
                 <div class="sc2-map-inner" id="map-s2"></div>
                 <div class="sc2-map-shadow"></div>
             </div>
-            
+
             <div class="sc2-timeline-pane" id="sc2-timeline-container">
                 <div class="sc2-timeline-list" id="sc2-timeline-list">
-                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- 섹션3 이동과정 -->
+    <section id="section3" class="sc3-section" data-section="3">
+        <header class="sc3-header">
+            <div class="sc3-header-bg"></div>
+            <div class="sc3-overlay sc3-overlay-header"></div>
+            <div class="sc3-header-content">
+                <div class="sc3-chapter-group">
+                    <span class="sc3-chapter-num">03</span>
+                    <div class="sc3-divider"></div>
+                    <span class="sc3-chapter-subtitle">이동과정</span>
+                </div>
+                <h1 class="sc3-title">뜨거운 함성이 거리를 뒤덮다</h1>
+                <p class="sc3-desc">독립을 향한 열망은 발걸음이 되어 서울 전역으로 뻗어나갔다.</p>
+            </div>
+        </header>
+
+        <div class="sc3-content-wrap">
+            <div class="sc3-map-pane">
+                <div id="map-s3" class="sc3-map-inner"></div>
+                <div class="sc3-map-shadow"></div>
+            </div>
+
+            <div class="sc3-timeline-pane">
+                <div id="sc3-timeline-list" class="sc3-timeline-list">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
     <script src="./js/section2.js"></script>
+    <script src="./js/section3.js"></script>
 </body>
 
 </html>

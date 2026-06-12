@@ -36,16 +36,16 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 1.5px solid rgba(245, 240, 232, 0.4);
+    border: 3px solid rgba(190, 0, 0, 0.4);
     background-color: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.global-dot.active {
+/* .global-dot.active {
     background-color: #a83228;
     border-color: #a83228;
-}
+} */
 
 .global-dot:hover {
     transform: scale(1.2);
