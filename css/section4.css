@@ -1,0 +1,275 @@
+/* =========================================
+   Section 4: 역사의 현장 (설명 뷰 & 지도 뷰)
+========================================= */
+
+/* --- 1. 설명 페이지 뷰 --- */
+.sc4-intro-view {
+    min-height: 100vh;
+    background-color: #0e0e0e;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.sc4-intro-content {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+}
+
+.sc4-intro-chap {
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 2rem;
+}
+
+.sc4-intro-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 3rem;
+}
+
+.sc4-intro-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 auto 4rem auto;
+    width: 100%;
+}
+
+.sc4-intro-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    text-align: left;
+}
+
+.sc4-col-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.sc4-icon {
+    font-size: 1.5rem;
+}
+
+.hub-icon {
+    color: #a83228;
+}
+
+.site-icon {
+    color: #b8922e;
+}
+
+.sc4-col-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    word-break: keep-all;
+}
+
+/* 텍스트 내 강조 색상 */
+.sc4-highlight-hub {
+    color: #a83228;
+    font-weight: bold;
+}
+
+.sc4-highlight-site {
+    color: #b8922e;
+    font-weight: bold;
+}
+
+
+/* --- 2. 지도 페이지 뷰 --- */
+.sc4-map-view {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+#map-s4 .leaflet-tile-pane {
+    filter: grayscale(100%) brightness(0.8);
+    transition: filter 0.3s ease;
+}
+
+.sc4-map-container {
+    position: absolute;
+    inset: 0;
+    background-color: #0e0e0e;
+}
+
+/* 지도 범례 (Legend Box) */
+.sc4-legend {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    z-index: 1000;
+    /* Leaflet 지도 위에 표시 */
+    background-color: #f5eddd;
+    /* 크림색 배경 */
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    color: #1f1b12;
+    min-width: 280px;
+}
+
+.sc4-legend-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.sc4-legend-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sc4-legend-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sc4-legend-text strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.sc4-legend-text span {
+    display: block;
+    font-size: 0.75rem;
+    color: #555;
+}
+
+.sc4-legend-footer {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: #777;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 1rem;
+}
+
+.sc4-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.hub-dot {
+    background-color: #a83228;
+}
+
+.site-dot {
+    background-color: #b8922e;
+}
+
+
+/* --- 3. 마커 펄스(파동) 애니메이션 --- */
+.sc4-marker-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sc4-pulse-hub,
+.sc4-pulse-site {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.sc4-pulse-hub {
+    background-color: #a83228;
+}
+
+.sc4-pulse-hub::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid #a83228;
+    animation: pulse-red 2s infinite ease-out;
+}
+
+.sc4-pulse-site {
+    background-color: #b8922e;
+}
+
+.sc4-pulse-site::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid #b8922e;
+    animation: pulse-gold 2s infinite ease-out;
+}
+
+@keyframes pulse-red {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse-gold {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* 스크롤 애니메이션 */
+.sc4-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sc4-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .sc4-intro-cols {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .sc4-legend {
+        left: 1rem;
+        bottom: 1rem;
+        right: 1rem;
+        min-width: auto;
+        padding: 1.5rem;
+    }
+}
