@@ -1,0 +1,167 @@
+/* =========================================
+   Section 6: 결론 (결과 카드 & 인용구)
+========================================= */
+
+/* 전체 래퍼 및 컨테이너 (위아래 여백 축소) */
+.sc6-content-wrap {
+    background-color: #0e0e0e; 
+    min-height: 100vh; /* ⭐ 화면 전체 높이를 차지하도록 설정 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ⭐ 세로(수직) 정중앙 정렬 */
+    justify-content: center; /* 가로 정중앙 정렬 */
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.sc6-inner-container {
+    max-width: 1100px;
+    width: 100%;
+    margin-top: -3rem; /* 시각적 안정감을 위해 전체 덩어리를 위로 살짝 끌어올림 */
+}
+
+/* 3단 카드 그리드 레이아웃 */
+.sc6-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; 
+    margin-bottom: 3rem; 
+}
+
+/* 개별 카드 디자인 */
+.sc6-card {
+    background: rgba(255, 255, 255, 0.02); 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    border-radius: 8px;
+    padding: 2rem 1.5rem; /* 카드 내부 위아래 여백 축소 (기존 3rem) */
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.sc6-card:hover {
+    transform: translateY(-5px); 
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.sc6-card-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; /* 숫자 크기 살짝 축소 */
+    color: rgba(255, 255, 255, 0.3); 
+    margin-bottom: 1rem;
+}
+
+.sc6-card-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.sc6-card-desc {
+    font-size: 0.9rem; /* 글씨 크기 미세조정 */
+    color: rgba(238, 230, 216, 0.8);
+    line-height: 1.6;
+    word-break: keep-all;
+    margin-bottom: 1rem;
+}
+
+.sc6-card-en {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: rgba(238, 230, 216, 0.4);
+}
+
+/* =========================================
+   하단 인용구 박스 디자인
+========================================= */
+.sc6-quote-section {
+    display: flex;
+    justify-content: center;
+}
+
+.sc6-quote-box {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    padding: 3.5rem 2rem; /* 박스 내부 상하 여백 축소 (기존 5rem) */
+    border: 1px solid rgba(255, 255, 255, 0.4); 
+    border-radius: 8px;
+    text-align: center;
+    background: transparent;
+    overflow: hidden; 
+}
+
+/* 우측 하단 거대한 1919 배경 */
+.sc6-quote-bg-num {
+    position: absolute;
+    bottom: -1.5rem; 
+    right: -1rem;  
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem; /* 배경 숫자 크기도 화면에 맞게 축소 */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.03); 
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+/* 텍스트 요소들 */
+.sc6-quote-main {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.35rem; /* 폰트 살짝 축소 */
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.6;
+    margin-bottom: 1.5rem; /* 간격 축소 */
+    word-break: keep-all;
+    position: relative;
+    z-index: 2;
+}
+
+.sc6-quote-sub {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2.5rem; /* 간격 축소 */
+    position: relative;
+    z-index: 2;
+}
+
+.sc6-quote-footer {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    color: rgba(238, 230, 216, 0.5);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+/* =========================================
+   스크롤 애니메이션 및 모바일 반응형
+========================================= */
+.sc6-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sc6-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+    .sc6-card-grid {
+        grid-template-columns: 1fr; 
+        gap: 1.5rem;
+    }
+    
+    .sc6-quote-main { font-size: 1.1rem; }
+    .sc6-quote-sub { font-size: 0.9rem; }
+    .sc6-quote-bg-num { font-size: 7rem; } 
+    .sc6-quote-box { padding: 2.5rem 1.5rem; }
+}
