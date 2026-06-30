@@ -64,10 +64,10 @@ async function initSection2Map() {
     }).addTo(mapS2);
 
     try {
-        const response = await fetch('./data/section2.geojson');
+        const response = await fetch('./assets/data/data1_3·1운동시간여행.geojson');
         const geojsonData = await response.json();
 
-        const targetIds = ["43", "13", "70", "20", "37", "42", "40"];
+        const targetIds = ["46", "13", "78", "20", "37", "42", "40", "8", "24"];
         const timelineData = [];
         const locationsS2 = [];
 

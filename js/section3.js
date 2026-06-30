@@ -33,7 +33,7 @@ async function initSection3Map() {
     ];
 
     try {
-        const response = await fetch('./data/section3.geojson');
+        const response = await fetch('./assets/data/data1_3·1운동시간여행.geojson');
         const sc3Data = await response.json();
 
         const timelineList = document.getElementById('sc3-timeline-list');
@@ -92,44 +92,32 @@ async function initSection3Map() {
 
                     // 새로운 선 지도에 그리기
                     if (targetFeature) {
-                        activeGeoJsonLayer = L.geoJSON(targetFeature, {
-                            style: {
-                                color: '#000000',
-                                weight: 6,
-                                opacity: 0.9,
-                                lineJoin: 'round',
-                                className: 'sc3-draw-path'
-                            }
-                        }).addTo(mapS3);
-                        // ⭐ [수정된 부분] 카드가 있는 '왼쪽' 공간을 크게 비워두어 선을 오른쪽으로 밀어냅니다.
+                        // ⭐ 1. 진짜 선을 그리기 전에 '임시 레이어'를 만들어 지도가 이동할 목표 지점(Bounds)만 계산합니다.
+                        const tempLayer = L.geoJSON(targetFeature);
+
                         mapS3.invalidateSize();
 
-                        // 1. 현재 화면 너비 확인 (예: 768px 이하를 모바일로 간주)
                         const isMobile = window.innerWidth <= 768;
-
                         let padTopLeft, padBottomRight;
 
                         if (isMobile) {
-                            // 📱 [모바일 환경] 
-                            // 가로 폭이 좁으므로 왼쪽 여백은 기본(예: 30)으로 줄입니다.
-                            // 만약 모바일에서 텍스트 카드가 '지도 아래쪽'에 뜬다면, 아래 여백(bottom)을 주어 지도를 위로 올립니다.
-                            padTopLeft = [30, 30];         // [왼쪽 여백, 위 여백]
-                            padBottomRight = [30, 150];    // [오른쪽 여백, 아래 여백] - 필요에 따라 150이라는 숫자를 조절하세요.
+                            padTopLeft = [30, 30];
+                            padBottomRight = [30, 150];
                         } else {
-                            // 💻 [데스크톱 환경] 
-                            // 카드가 왼쪽에 있으므로 기존처럼 왼쪽 여백을 크게 줍니다.
-                            padTopLeft = [450, 50];        // [왼쪽 여백, 위 여백]
-                            padBottomRight = [50, 50];     // [오른쪽 여백, 아래 여백]
+                            padTopLeft = [450, 50];
+                            padBottomRight = [50, 50];
                         }
 
-                        // 2. 조건에 맞게 계산된 패딩 적용
-                        mapS3.fitBounds(activeGeoJsonLayer.getBounds(), {
+                        // ⭐ 2. 지도 카메라를 먼저 부드럽게 이동시킵니다. (선은 아직 그리지 않음!)
+                        mapS3.fitBounds(tempLayer.getBounds(), {
                             paddingTopLeft: padTopLeft,
                             paddingBottomRight: padBottomRight,
-                            maxZoom: 16
+                            maxZoom: 16,
+                            animate: true,
+                            duration: 0.5
                         });
 
-                        // 출발점, 도착점 마커 생성 로직
+                        // 3. 출발점, 도착점 마커는 지도가 움직일 때 바로 보이도록 먼저 찍어줍니다.
                         let lineCoords = [];
                         if (targetFeature.geometry.type === 'GeometryCollection') {
                             const lineStringGeo = targetFeature.geometry.geometries.find(g => g.type === 'LineString');
@@ -158,18 +146,30 @@ async function initSection3Map() {
                             activeMarkers.push(L.marker(endCoord, { icon: endIcon }).addTo(mapS3));
                         }
 
-                        // 선 스르륵 그려지는 애니메이션
+                        // ⭐ 4. 지도가 이동을 완료한 후(0.6초 뒤)에 진짜 선을 맵에 추가하고 애니메이션을 실행합니다.
                         setTimeout(() => {
+                            // 이제 진짜 선을 지도에 올립니다.
+                            activeGeoJsonLayer = L.geoJSON(targetFeature, {
+                                style: {
+                                    color: '#000000',
+                                    weight: 6,
+                                    opacity: 0.9, // 정상적인 투명도로 설정
+                                    lineJoin: 'round',
+                                    className: 'sc3-draw-path'
+                                }
+                            }).addTo(mapS3);
+
+                            // 선 스르륵 애니메이션 실행
                             const paths = document.querySelectorAll('.sc3-draw-path');
                             paths.forEach(path => {
                                 const length = path.getTotalLength();
                                 path.style.strokeDasharray = length;
                                 path.style.strokeDashoffset = length;
-                                path.getBoundingClientRect();
+                                path.getBoundingClientRect(); // 강제 리플로우 (브라우저 새로고침 효과)
                                 path.style.transition = 'stroke-dashoffset 2.5s ease-in-out';
                                 path.style.strokeDashoffset = '0';
                             });
-                        }, 0);
+                        }, 600); // 0.6초 대기
                     }
                 }
             });

@@ -21,7 +21,7 @@ async function initSection5Map() {
 
     try {
         // 2. GeoJSON 데이터 불러오기 (section5.geojson)
-        const response = await fetch('./data/section5.geojson');
+        const response = await fetch('./assets/data/data2_3·1운동 생활 속 현장.geojson');
         const geojsonData = await response.json();
 
         const trackContainer = document.getElementById('sc5-activist-list');

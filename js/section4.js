@@ -21,7 +21,7 @@ async function initSection4Map() {
 
     try {
         // 2. GeoJSON 데이터 불러오기 (경로 수정 완료)
-        const response = await fetch('./data/section.geojson');
+        const response = await fetch('./assets/data/data1_3·1운동시간여행.geojson');
         const geojsonData = await response.json();
 
         // 3. 지도가 화면에 보일 때 마커 생성 (IntersectionObserver)
